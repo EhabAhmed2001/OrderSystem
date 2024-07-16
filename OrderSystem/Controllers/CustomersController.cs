@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,7 @@ namespace OrderSystem.PL.Controllers
             return BadRequest(new { Message = "An Error Happened When Create New Customer.. Try Again" });
         }
 
+        [Authorize]
         [HttpGet("{CustomerId}/orders")]
         public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetAllOrdersForCustomer(int CustomerId)
         {

@@ -9,6 +9,8 @@ using OrderSystem.PL.DTOs;
 
 namespace OrderSystem.PL.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class InvoiceController : APIBaseController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +25,6 @@ namespace OrderSystem.PL.Controllers
 
         [ProducesResponseType(typeof(InvoiceToReturnDto), 200)]
         [ProducesResponseType(typeof(NotFound), 404)]
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<InvoiceToReturnDto>>> GetInvoices()
         {
@@ -38,7 +39,6 @@ namespace OrderSystem.PL.Controllers
 
         [ProducesResponseType(typeof(InvoiceToReturnDto), 200)]
         [ProducesResponseType(typeof(NotFound), 404)]
-        [Authorize(Roles = "Admin")]
         [HttpGet("{invoiceId}")]
         public async Task<ActionResult<InvoiceToReturnDto>> GetInvoiceById(int invoiceId)
         {
